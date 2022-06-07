@@ -9,4 +9,5 @@ flask_cors.CORS(flask_app)
 
 meal_routes(flask_app)
 
+
 flask_app.run(debug = True)
