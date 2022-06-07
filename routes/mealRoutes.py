@@ -1,4 +1,4 @@
-from controller import mealController
+from controllers import mealController
 
 def meal_routes(flask_app):
 
