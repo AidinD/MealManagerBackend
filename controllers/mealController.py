@@ -1,4 +1,5 @@
 import flask
+from models.mealModel import Meal
 
 def get_meals():
         return flask.jsonify({"meals": [
