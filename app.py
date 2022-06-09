@@ -17,8 +17,6 @@ flask_app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://' + username +':'
 db.init_app(flask_app)
 meal_routes(flask_app)
 
-#flask_app.config.get('DB_ADDRESS')
-
 db = SQLAlchemy(flask_app)
 db.create_all()
 
