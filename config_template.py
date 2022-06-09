@@ -4,4 +4,5 @@ CORS_HEADERS = 'Content-Type'
 
 #-----------------------------------------------------#
 DB_ADDRESS = 'insert.url.here'
+DB_USER = "insert.username.here"
 DB_KEY = 'insert.key.here'
