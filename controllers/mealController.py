@@ -8,13 +8,13 @@ from models.shared import Serializer
 def get_meals():
         meals = Meal.query.all()
         if(meals is None):
-            return dumps([])
+            return jsonify([])
         return jsonify(meals = Serializer.as_dict_list(meals))
 
 def get_meal(meal_id):
         meal = Meal.query.filter_by(id=meal_id).first()
         if(meal is None):
-            return dumps([])
+            return jsonify([])
         return jsonify(meal.as_dict())
 
 def add_meal(name, description, times_made, last_made, ranking, user, online_url, image_url):
@@ -26,7 +26,7 @@ def add_meal(name, description, times_made, last_made, ranking, user, online_url
 def update_meal(meal_id, name, description, times_made, last_made, ranking, user, online_url, image_url):
         meal = Meal.query.filter_by(id=meal_id).first()
         if(meal is None):
-            return dumps([])
+            return jsonify([])
         meal.name = name
         meal.description = description
         meal.times_made = times_made
@@ -41,7 +41,7 @@ def update_meal(meal_id, name, description, times_made, last_made, ranking, user
 def delete_meal(meal_id):
         meal = Meal.query.filter_by(id=meal_id).first()
         if(meal is None):
-            return dumps([])
+            return jsonify([])
         db.session.delete(meal)
         db.session.commit()
         return jsonify(meal.as_dict())

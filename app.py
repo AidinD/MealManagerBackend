@@ -1,7 +1,7 @@
 from flask import Flask
 
 from models.shared import db
-from routes.mealRoutes import meal_routes
+from routes.index import routes
 
 flask_app = Flask(__name__)
 
@@ -17,6 +17,6 @@ flask_app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://' + username +':'
 #endregion
 
 db.init_app(flask_app)
-meal_routes(flask_app)
+routes(flask_app)
 
 flask_app.run(debug = True)

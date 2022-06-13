@@ -14,8 +14,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://' + username +':' +key 
 
 db.init_app(app)
 
-
-
 with app.app_context():
     db.create_all()
 
