@@ -1,6 +1,7 @@
 from controllers import mealController
 from flask import request
 
+
 def meal_routes(flask_app):
 
     @flask_app.route('/meals', methods=['GET'])
