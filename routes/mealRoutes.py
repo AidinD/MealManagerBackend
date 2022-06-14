@@ -14,7 +14,6 @@ def meal_routes(flask_app):
 
     @flask_app.route('/meal', methods=['POST'])
     def add_meal():
-        print(request.form["name"])
         name = request.form["name"]
         description = request.form["description"]
         times_made = request.form["times_made"]

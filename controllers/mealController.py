@@ -1,9 +1,7 @@
 from flask import jsonify
 from json import dumps
 from models.mealModel import Meal
-from models.shared import db
-
-from models.shared import Serializer
+from models.shared import Serializer, db
 
 
 def get_meals():
