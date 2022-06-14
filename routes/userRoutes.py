@@ -12,6 +12,10 @@ def user_routes(flask_app):
     def get_user(user_id):
         return userController.get_user(user_id)
 
+    @flask_app.route('/user/<string:name>', methods=['GET'])
+    def get_user_by_name(name):
+        return userController.get_user_by_name(name)
+
     @flask_app.route('/user', methods=['POST'])
     def add_user():
         name = request.form["name"]
