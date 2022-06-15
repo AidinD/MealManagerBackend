@@ -11,7 +11,7 @@ def get_meals():
             return Serializer.as_response_json([], 204)
         return Serializer.as_response_json(Serializer.as_dict_list(meals), 200)
     except Exception as e:
-        return Serializer.as_response_json(e, 500)
+        return Serializer.as_response_json(str(e), 500)
 
 
 def get_meal(meal_id):
@@ -21,7 +21,7 @@ def get_meal(meal_id):
             return Serializer.as_response_json([], 204)
         return Serializer.as_response_json(meal.as_dict(), 200)
     except Exception as e:
-        return Serializer.as_response_json(e, 500)
+        return Serializer.as_response_json(str(e), 500)
 
 
 def add_meal(name, description, times_made, last_made, ranking, user, online_url, image_url):
@@ -32,7 +32,7 @@ def add_meal(name, description, times_made, last_made, ranking, user, online_url
         db.session.commit()
         return Serializer.as_response_json(meal.as_dict(), 200)
     except Exception as e:
-        return Serializer.as_response_json(e, 500)
+        return Serializer.as_response_json(str(e), 500)
 
 
 def update_meal(meal_id, name, description, times_made, last_made, ranking, user, online_url, image_url):
@@ -51,7 +51,7 @@ def update_meal(meal_id, name, description, times_made, last_made, ranking, user
         db.session.commit()
         return Serializer.as_response_json(meal.as_dict(), 200)
     except Exception as e:
-        return Serializer.as_response_json(e, 500)
+        return Serializer.as_response_json(str(e), 500)
 
 
 def delete_meal(meal_id):
@@ -63,4 +63,4 @@ def delete_meal(meal_id):
         db.session.commit()
         return Serializer.as_response_json(meal.as_dict(), 200)
     except Exception as e:
-        return Serializer.as_response_json(e, 500)
+        return Serializer.as_response_json(str(e), 500)
