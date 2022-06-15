@@ -13,7 +13,8 @@ class User(db.Model, Serializer):
         self.updated_at = func.now()
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False, server_default='')
+    name = db.Column(db.String(100), unique=True,
+                     nullable=False, server_default='')
     share = db.Column(db.String(300), nullable=False, server_default='')
     created_at = db.Column(db.DateTime(timezone=True),
                            nullable=False, server_default=func.now())

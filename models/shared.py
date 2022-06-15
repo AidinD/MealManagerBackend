@@ -15,5 +15,5 @@ class Serializer:
 
     @staticmethod
     def as_response_json(data, code=200):
-        return jsonify({'status': code, 'data': data})
+        return jsonify(status=code, data=data)
     pass
