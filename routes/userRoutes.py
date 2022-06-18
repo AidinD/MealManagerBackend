@@ -1,5 +1,6 @@
 from controllers import userController
 from flask import request
+from flask_cors import cross_origin
 
 
 def user_routes(flask_app):
@@ -16,10 +17,12 @@ def user_routes(flask_app):
     def get_user_by_name(name):
         return userController.get_user_by_name(name)
 
-    @flask_app.route('/user', methods=['POST'])
+    @flask_app.route('/user', methods=['PUT'])
+    @cross_origin(origin='*', headers=['Content-Type', 'allow-headers'])
     def add_user():
-        name = request.form["name"]
-        share = request.form["share"]
+        print()
+        name = request.form.get("name")
+        share = request.form.get("share")
         return userController.add_user(name, share)
 
     @flask_app.route('/user/<int:user_id>', methods=['PUT'])

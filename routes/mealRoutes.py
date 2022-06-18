@@ -12,7 +12,7 @@ def meal_routes(flask_app):
     def get_meal(meal_id):
         return mealController.get_meal(meal_id)
 
-    @flask_app.route('/meal', methods=['POST'])
+    @flask_app.route('/meal', methods=['PUT'])
     def add_meal():
         name = request.form["name"]
         description = request.form["description"]
