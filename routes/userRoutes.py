@@ -14,6 +14,7 @@ def user_routes(flask_app):
         return userController.get_user(user_id)
 
     @flask_app.route('/user/<string:name>', methods=['GET'])
+    @cross_origin()
     def get_user_by_name(name):
         return userController.get_user_by_name(name)
 
