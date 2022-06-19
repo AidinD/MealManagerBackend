@@ -19,7 +19,6 @@ def get_user(user_id):
     try:
         user = User.query.filter_by(id=user_id).first()
         if(not user or user is None):
-            print("hej")
             return Serializer.as_response_json([], 204), 200
         return Serializer.as_response_json(user.as_dict_list(), 200), 200
     except Exception as e:
@@ -60,7 +59,7 @@ def update_user(user_id, name, share):
             return Serializer.as_response_json(data, 400), 400
 
         user = User.query.filter_by(id=user_id).first()
-        if(user is None):
+        if(not user or user is None):
             return Serializer.as_response_json([], 204), 200
 
         user.name = name
