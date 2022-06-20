@@ -35,13 +35,13 @@ def get_user_by_name(name):
         return Serializer.as_response_json(str(e), 500), 500
 
 
-def add_user(name, share):
+def add_user(name):
     try:
         if(not name or name == ""):
             data = {'message': 'Name cannot be empty'}
             return Serializer.as_response_json(data, 400), 400
 
-        user = User(name, share)
+        user = User(name)
         db.session.add(user)
         db.session.commit()
         return Serializer.as_response_json(user.as_dict(), 200), 200
@@ -52,7 +52,7 @@ def add_user(name, share):
         return Serializer.as_response_json(str(e), 500), 500
 
 
-def update_user(user_id, name, share):
+def update_user(user_id, name):
     try:
         if(not name or name == ""):
             data = {'message': 'Name cannot be empty'}
@@ -63,7 +63,6 @@ def update_user(user_id, name, share):
             return Serializer.as_response_json([], 204), 200
 
         user.name = name
-        user.share = share
         db.session.commit()
         return Serializer.as_response_json(user.as_dict(), 200), 200
     except exc.IntegrityError as e:

@@ -21,20 +21,16 @@ def user_routes(flask_app):
     @flask_app.route('/user', methods=['PUT'])
     @cross_origin()
     def add_user():
-        print("balala")
         content = request.json
         name = content.get("name")
-        share = content.get("share")
-        return userController.add_user(name, share)
+        return userController.add_user(name)
 
     @flask_app.route('/user/<int:user_id>', methods=['PUT'])
     @cross_origin()
     def update_user(user_id):
         content = request.json
         name = content.get("name")
-        share = content.get("share")
-        print("Hejhej")
-        return userController.update_user(user_id, name, share)
+        return userController.update_user(user_id, name)
 
     @flask_app.route('/user/<int:user_id>', methods=['DELETE'])
     @cross_origin()
