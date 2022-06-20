@@ -20,7 +20,7 @@ def get_user(user_id):
         user = User.query.filter_by(id=user_id).first()
         if(not user or user is None):
             return Serializer.as_response_json([], 204), 200
-        return Serializer.as_response_json(user.as_dict_list(), 200), 200
+        return Serializer.as_response_json(user.as_dict(), 200), 200
     except Exception as e:
         return Serializer.as_response_json(str(e), 500), 500
 
