@@ -1,5 +1,7 @@
 from flask import Flask
 from models.shared import db
+from models.mealModel import Meal
+from models.userModel import User
 
 app = Flask(__name__)
 
