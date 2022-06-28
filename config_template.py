@@ -8,5 +8,5 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 DB_ADDRESS = 'insert.url.here'
 DB_PORT = 'insert.port.here'
 DB_USER = "insert.username.here"
-DB_KEY = 'insert.key.here'
+DB_PASSWORD = 'insert.password.here'
 DB_NAME = 'insert.database.name.here'
