@@ -9,7 +9,8 @@ username = app.config['DB_USER']
 key = app.config['DB_KEY']
 host = app.config['DB_ADDRESS']
 databaseName = app.config['DB_NAME']
-connection_string = f"mysql+mysqldb://{username}:{key}@{host}/{databaseName}"
+port = app.config['DB_PORT']
+connection_string = f"mysql+mysqldb://{username}:{key}@{host}:{port}/{databaseName}"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = connection_string
 

@@ -14,7 +14,8 @@ username = flask_app.config['DB_USER']
 key = flask_app.config['DB_KEY']
 host = flask_app.config['DB_ADDRESS']
 databaseName = flask_app.config['DB_NAME']
-connection_string = f"mysql+mysqldb://{username}:{key}@{host}/{databaseName}"
+port = app.config['DB_PORT']
+connection_string = f"mysql+mysqldb://{username}:{key}@{host}:{port}/{databaseName}"
 
 flask_app.config['SQLALCHEMY_DATABASE_URI'] = connection_string
 # endregion
