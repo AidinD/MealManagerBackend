@@ -11,13 +11,13 @@ cors = CORS(flask_app)
 flask_app.config.from_pyfile('config.py')
 
 username = flask_app.config['DB_USER']
-key = flask_app.config['DB_KEY']
+password = flask_app.config['DB_PASSWORD']
 host = flask_app.config['DB_ADDRESS']
 databaseName = flask_app.config['DB_NAME']
+port = flask_app.config['DB_PORT']
+connection_string = f"mysql+mysqldb://{username}:{password}@{host}:{port}/{databaseName}"
 
-
-flask_app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://' + \
-    username + ':' + key + '@'+host+'/' + databaseName
+flask_app.config['SQLALCHEMY_DATABASE_URI'] = connection_string
 # endregion
 
 db.init_app(flask_app)
