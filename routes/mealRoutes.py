@@ -14,26 +14,26 @@ def meal_routes(flask_app):
 
     @flask_app.route('/meal', methods=['PUT'])
     def add_meal():
-        name = request.form["name"]
-        description = request.form["description"]
-        times_made = request.form["times_made"]
-        last_made = request.form["last_made"]
-        ranking = request.form["ranking"]
-        online_url = request.form["online_url"]
-        image_url = request.form["image_url"]
-        user = request.form["user"]
-        return mealController.add_meal(name, description, times_made, last_made, ranking, user, online_url, image_url)
+        content = request.json
+        name = content.get("name")
+        description = content.get("description")
+        ranking = content.get("ranking")
+        online_url = content.get("online_url")
+        image_url = content.get("image_url")
+        user = content.get("user")
+        return mealController.add_meal(name, description, ranking, user, online_url, image_url)
 
     @flask_app.route('/meal/<int:meal_id>', methods=['PUT'])
     def update_meal(meal_id):
-        name = request.form["name"]
-        description = request.form["description"]
-        times_made = request.form["times_made"]
-        last_made = request.form["last_made"]
-        ranking = request.form["ranking"]
-        online_url = request.form["online_url"]
-        image_url = request.form["image_url"]
-        user = request.form["user"]
+        content = request.json
+        name = content.get("name")
+        description = content.get("description")
+        times_made = content.get("times_made")
+        last_made = content.get("last_made")
+        ranking = content.get("ranking")
+        online_url = content.get("online_url")
+        image_url = content.get("image_url")
+        user = content.get("user")
         return mealController.update_meal(meal_id, name, description, times_made, last_made, ranking, user, online_url, image_url)
 
     @flask_app.route('/meal/<int:meal_id>', methods=['DELETE'])

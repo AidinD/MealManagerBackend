@@ -1,5 +1,3 @@
-from flask import jsonify
-from json import dumps
 from models.mealModel import Meal
 from models.shared import Serializer, db
 
@@ -24,10 +22,13 @@ def get_meal(meal_id):
         return Serializer.as_response_json(str(e), 500), 500
 
 
-def add_meal(name, description, times_made, last_made, ranking, user, online_url, image_url):
+def add_meal(name, description, ranking, user, online_url, image_url):
     try:
-        meal = Meal(name, description, times_made, last_made,
-                    ranking, user, online_url, image_url)
+        if(not name or name == ""):
+            data = {'message': 'Name cannot be empty'}
+            return Serializer.as_response_json(data, 400), 400
+        meal = Meal(name, description, [""], ranking,
+                    user, online_url, image_url)
         db.session.add(meal)
         db.session.commit()
         return Serializer.as_response_json(meal.as_dict(), 200), 200
