@@ -7,15 +7,15 @@ from models.userModel import User
 
 class Meal(db.Model, Serializer):
     fields = ['id', 'name', 'description', 'times_made', 'last_made', 'tags',
-              'ranking', 'online_url', 'image', 'user', 'created_at', 'updated_at']
+              'rating', 'online_url', 'image', 'user', 'created_at', 'updated_at']
 
-    def __init__(self, name, description, tags, ranking, user, online_url, image_url):
+    def __init__(self, name, description, tags, rating, user, online_url, image_url):
         self.name = name
         self.description = description
         self.times_made = 0
         self.last_made = datetime(2000, 1, 1)
         self.tags = tags
-        self.ranking = ranking
+        self.rating = rating
         self.online_url = online_url
         self.image_url = image_url
         self.user = user
@@ -30,7 +30,7 @@ class Meal(db.Model, Serializer):
     last_made = db.Column(db.DateTime(timezone=True),
                           nullable=False, server_default=func.now())
     tags = db.Column(db.String(300), nullable=False, server_default='')
-    ranking = db.Column(db.Integer, nullable=False, server_default='3')
+    rating = db.Column(db.Float, nullable=False, server_default='3')
     online_url = db.Column(db.String(300), nullable=False, server_default='')
     image_url = db.Column(db.String(300), nullable=False, server_default='')
     user = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
