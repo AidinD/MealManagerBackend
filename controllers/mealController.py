@@ -1,6 +1,7 @@
 from models.mealModel import Meal
 from models.shared import Serializer, db
 from sqlalchemy import exc
+from models.tagModel import Tag
 
 
 def get_meals():
@@ -23,13 +24,17 @@ def get_meal(meal_id):
         return Serializer.as_response_json(str(e), 500), 500
 
 
-def add_meal(name, description, rating, user, online_url, image_url):
+def add_meal(name, description, rating, user, online_url, image_url, tag_ids):
     try:
         if(not name or name == ""):
             data = {'message': 'Name cannot be empty'}
             return Serializer.as_response_json(data, 400), 400
-        meal = Meal(name, description, [""], rating,
+        meal = Meal(name, description, rating,
                     user, online_url, image_url)
+
+        tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
+        meal.mealtag.extend(tags)
+
         db.session.add(meal)
         db.session.commit()
         return Serializer.as_response_json(meal.as_dict(), 200), 200
