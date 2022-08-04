@@ -7,8 +7,10 @@ from models.tagModel import Tag
 
 MealTag = db.Table('mealtag',
                    db.Column('mealId', db.Integer, db.ForeignKey(
-                       "meal.id"), nullable=False, primary_key=True),
-                   db.Column('tagId', db.Integer, db.ForeignKey(Tag.id), nullable=False, primary_key=True))
+                       "meal.id"), nullable=False),
+                   db.Column('tagId', db.Integer, db.ForeignKey(
+                       Tag.id), nullable=False),
+                   db.PrimaryKeyConstraint('mealId', 'tagId'))
 
 
 class Meal(db.Model, Serializer):
@@ -43,6 +45,6 @@ class Meal(db.Model, Serializer):
     updated_at = db.Column(db.DateTime(
         timezone=True), nullable=False, onupdate=func.now(), server_default=func.now())
 
-    mealtag = db.relationship(
-        Tag, secondary=MealTag, lazy="subquery", backref=db.backref('meals', lazy=True))
+    tags = db.relationship('Tag', secondary=MealTag,
+                           lazy='subquery', backref=db.backref('meals', lazy="dynamic"))
     pass

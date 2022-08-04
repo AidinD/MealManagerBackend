@@ -23,4 +23,4 @@ flask_app.config['SQLALCHEMY_DATABASE_URI'] = connection_string
 db.init_app(flask_app)
 routes(flask_app)
 
-flask_app.run(debug=True)
+# flask_app.run(debug=True)
