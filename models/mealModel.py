@@ -46,5 +46,5 @@ class Meal(db.Model, Serializer):
         timezone=True), nullable=False, onupdate=func.now(), server_default=func.now())
 
     tags = db.relationship('Tag', secondary=MealTag,
-                           lazy='subquery', backref=db.backref('meals', lazy="dynamic"))
+                           lazy='subquery', backref=db.backref('meals', lazy=True))
     pass
