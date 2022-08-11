@@ -62,11 +62,18 @@ def add_meal(name, description, rating, user, online_url, image_url, tag_ids):
         return Serializer.as_response_json(str(e), 500), 500
 
 
-def update_meal(meal_id, name, description, times_made, last_made, rating, user, online_url, image_url):
+def update_meal(meal_id, name, description, times_made, last_made, rating, user, online_url, image_url, tag_ids):
     try:
+        if(not name or name == ""):
+            data = {'message': 'Name cannot be empty'}
+            return Serializer.as_response_json(data, 400), 400
+
         meal = Meal.query.filter_by(id=meal_id).first()
         if(meal is None):
             return Serializer.as_response_json([], 204), 204
+        tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
+        meal.tags = tags
+
         meal.name = name
         meal.description = description
         meal.times_made = times_made

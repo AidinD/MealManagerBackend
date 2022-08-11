@@ -35,7 +35,8 @@ def meal_routes(flask_app):
         online_url = content.get("online_url")
         image_url = content.get("image_url")
         user = content.get("user")
-        return mealController.update_meal(meal_id, name, description, times_made, last_made, rating, user, online_url, image_url)
+        tag_ids = content.get("tag_ids")
+        return mealController.update_meal(meal_id, name, description, times_made, last_made, rating, user, online_url, image_url, tag_ids)
 
     @flask_app.route('/meal/<int:meal_id>', methods=['DELETE'])
     def delete_meal(meal_id):
