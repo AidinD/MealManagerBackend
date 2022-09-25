@@ -60,11 +60,23 @@ def add_planned(user, meal_id):
         return Serializer.as_response_json(str(e), 500), 500
 
 
-def update_planned(meal_id, name, description, times_made, last_made, rating, user, online_url, image_url, tag_ids):
+def update_planned(planner_id, meal_id, completed):
     try:
-        if(not name or name == ""):
-            data = {'message': 'Name cannot be empty'}
+        if(not meal_id or meal_id == ""):
+            data = {'message': 'Something went wrong, meal_id is empty'}
 
+        # TODO We need to check if foreign key exists on all add and update
+
+        plannedMeal = Planner.query.filter_by(id=planner_id).first()
+        if(plannedMeal is None):
+            return Serializer.as_response_json([], 204), 204
+
+        plannedMeal.meal_id = meal_id
+        plannedMeal.completed = completed
+
+        db.session.commit()
+
+        return Serializer.as_response_json(plannedMeal.as_dict(), 200), 200
     except Exception as e:
         return Serializer.as_response_json(str(e), 500), 500
 
