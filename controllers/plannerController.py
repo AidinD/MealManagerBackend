@@ -81,25 +81,27 @@ def update_planned(planner_id, meal_id, completed):
         return Serializer.as_response_json(str(e), 500), 500
 
 
-def delete_all_planned(meal_id):
+def delete_planned(planner_id):
     try:
-        meal = Meal.query.filter_by(id=meal_id).first()
-        if(meal is None):
+        plannedMeal = Planner.query.filter_by(id=planner_id).first()
+        if(plannedMeal is None):
             return Serializer.as_response_json([], 204), 204
-        db.session.delete(meal)
+        db.session.delete(plannedMeal)
         db.session.commit()
-        return Serializer.as_response_json(meal.as_dict(), 200), 200
+        return Serializer.as_response_json(plannedMeal.as_dict(), 200), 200
     except Exception as e:
         return Serializer.as_response_json(str(e), 500), 500
 
 
-def delete_planned(meal_id):
+def delete_all_planned_by_user(user_id):
     try:
-        meal = Meal.query.filter_by(id=meal_id).first()
-        if(meal is None):
+        plannedMeals = Planner.query.filter_by(user=user_id).all()
+        if(plannedMeals is None or len(plannedMeals) == 0):
             return Serializer.as_response_json([], 204), 204
-        db.session.delete(meal)
+
+        for plannedMeal in plannedMeals:
+            db.session.delete(plannedMeal)
         db.session.commit()
-        return Serializer.as_response_json(meal.as_dict(), 200), 200
+        return Serializer.as_response_json(Serializer.as_dict_list(plannedMeals), 200), 200
     except Exception as e:
         return Serializer.as_response_json(str(e), 500), 500

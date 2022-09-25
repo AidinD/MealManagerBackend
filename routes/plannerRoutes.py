@@ -27,6 +27,10 @@ def planner_routes(flask_app):
 
         return plannerController.update_planned(planner_id, meal_id, completed)
 
-    @flask_app.route('/meal/<int:meal_id>', methods=['DELETE'])
-    def delete_planned(meal_id):
-        return plannerController.delete_meal(meal_id)
+    @flask_app.route('/planner/<int:planner_id>', methods=['DELETE'])
+    def delete_planned(planner_id):
+        return plannerController.delete_planned(planner_id)
+
+    @flask_app.route('/plannerall/<int:user_id>', methods=['DELETE'])
+    def delete_AllUserPlanned(user_id):
+        return plannerController.delete_all_planned_by_user(user_id)
