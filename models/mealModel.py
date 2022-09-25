@@ -47,4 +47,5 @@ class Meal(db.Model, Serializer):
 
     tags = db.relationship('Tag', secondary=MealTag,
                            lazy='subquery', backref=db.backref('meals', lazy=True))
+
     pass

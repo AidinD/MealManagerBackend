@@ -14,11 +14,10 @@ def get_meals():
         for meal in meals:
             mealJson = meal.as_dict()
             tagJson = Serializer.as_dict_list(meal.tags)
-
             mealTag = {**mealJson, **{'tags': tagJson}}
             mealTags.append(mealTag)
 
-        if(meals is None):
+        if(meals is None or len(meals) == 0):
             return Serializer.as_response_json([], 204), 204
         return Serializer.as_response_json(mealTags, 200), 200
     except Exception as e:
@@ -46,6 +45,7 @@ def add_meal(name, description, rating, user, online_url, image_url, tag_ids):
         if(not name or name == ""):
             data = {'message': 'Name cannot be empty'}
             return Serializer.as_response_json(data, 400), 400
+
         meal = Meal(name, description, rating,
                     user, online_url, image_url)
 

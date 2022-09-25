@@ -2,6 +2,7 @@ from flask import Flask
 from models.shared import db
 from models.mealModel import Meal
 from models.userModel import User
+from models.plannerModel import Planner
 
 app = Flask(__name__)
 
